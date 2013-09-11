@@ -1,7 +1,8 @@
-#Start at the top of triangle.txt
-#Move to one of the two adjacent numbers on the row below
-#After reaching the final row, a path will have been created.
-#Find the maximum possible sum for all paths.
+# Problem Statement:
+# Start at the top of triangle.txt
+# Move to one of the two adjacent numbers on the row below
+# After reaching the final row, a path will have been created.
+# Find the maximum possible sum for all paths.
 
 
 #Recursive solution, takes around .01 seconds
