@@ -17,6 +17,8 @@
 #              m1, m2, m3, ... are all different
 #              n1, n2, n3, ... are all different
 
+#Original description: 
+#http://domino.research.ibm.com/Comm/wwwr_ponder.nsf/Challenges/November2013.html
 
 from math import factorial
 from itertools import combinations
