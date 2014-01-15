@@ -1,3 +1,5 @@
+##Find the minimal path sum, in matrix.txt, containing an 80x80 matrix,
+##from the top left to the bottom right by only moving right and down.
 
 with open('matrix.txt', 'r') as matrix:
     bigList = [[int(y) for y in x.split(',')] for x in matrix]
@@ -29,3 +31,4 @@ for row in range(1, colSize):
 print minSumList[-1][-1]
 
 #shortest path can also be found using Dijkstra's algorithm
+
