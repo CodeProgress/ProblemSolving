@@ -17,33 +17,35 @@
 #It can be seen that n=6 produces a maximum n/φ(n) for n ≤ 10.
 #
 #Find the value of n ≤ 1,000,000 for which n/φ(n) is a maximum.
+#
+#PEuler69
+
 
 def genPrimes():
     """Prime number generator.
     """
     primes = []
-    q = 2  
+    posPrime = 2  
     while True:
         isPrime = True
-        upper = int(q**.5)
+        upper = int(posPrime**.5)
         for i in primes:
             if i > upper:
                 isPrime = True
                 break
-            if q%i == 0:
+            if posPrime % i == 0:
                 isPrime = False
                 break
         if isPrime:
-            yield q
-            primes.append(q)
+            yield posPrime
+            primes.append(posPrime)
         
-        q += 1
+        posPrime += 1
         
 def findTotMax(limit = 1000000):
     primeGenerator = genPrimes()
     totMax = 1
     while totMax < limit:
-        #print totMax
         prime = primeGenerator.next()
         temp = prime
         totMax *= prime
