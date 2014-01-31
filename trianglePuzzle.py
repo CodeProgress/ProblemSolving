@@ -10,14 +10,14 @@ def maxPathSum(tri):
     assumes values in lists are ints
     '''
     place = len(tri) - 1
-    updatedRow = tri[place][:] # avoid mutating original list
+    bufferRow = tri[place][:]
     
     while place > 0:
         for i in xrange(place):
-            updatedRow[i] = tri[place-1][i] + max(updatedRow[i], updatedRow[i+1])
+            bufferRow[i] = tri[place-1][i] + max(bufferRow[i], bufferRow[i+1])
         place -= 1
 
-    return updatedRow[0]
+    return bufferRow[0]
 
         
 with open('triangle.txt', 'r') as triangle:
