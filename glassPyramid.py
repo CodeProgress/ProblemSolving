@@ -17,40 +17,58 @@
 #2nd row, 1st glass - 1/2 litre 
 #2nd row, 2nd glass - 1/2 litre
 
+#recursive solution:
+    
 class Pyramid(object):
-    def __init__(self, pourQuantity):
-        self.pyramid = []
-        self.pourQuantity = pourQuantity
-        
-    def add_glass(self):
-        self.pyramid.append(Glass())
-    
-    def add_to_glass(self, glass, volume):
-        #recursive approach
-        #excess = glass.add(volume)
-        #if excess:
-        #   add_to_glass(glass.left, excess/2.)
-        #   add_to_glass(glass.right, excess/2.)
-        pass
-        
-        
-    
-class Glass(object):
-    def __init__(self, row, col, capacity = 1):
-        self.row      = row #redundant? Keep track with indices of pyramid?
-        self.col      = col
+    def __init__(self, capacity = 1.0):
+        self.pyramid = {}
         self.capacity = capacity
-        self.holding  = 0
 
-    def add(self, volume):
-        """adds volume to glass, returns volume of overflow or 0 if no overflow
-        volume: int or double
+    def update_glass(self, volume, row, col):
+        """handles the excess from the add_volume method and updates pyramid
         """
-        self.holding += volume
-        if self.holding > self.capacity:
-            excess = self.holding - self.capacity
-            self.holding = self.capacity
-            return excess
-        return 0            #if no overflow, excess = 0
+        if (row, col) in self.pyramid:
+            excess = self.add_volume(volume, row, col)    
+            if excess:
+                self.update_glass(excess/2., row+1, col)
+                self.update_glass(excess/2., row+1, col+1)
+        else:
+            self.pyramid[(row, col)] = 0
+            excess = self.add_volume(volume, row, col)    
+            if excess:
+                self.update_glass(excess/2., row+1, col)
+                self.update_glass(excess/2., row+1, col+1)
+        
+        return self.pyramid
 
+    def add_volume(self, volume, row, col):
+        """adds volume to glass in pyramid, if excess return excess, else return 0
+        """
+        if self.pyramid[(row, col)] + volume > self.capacity:
+            excess = (self.pyramid[(row, col)] + volume) - self.capacity
+            self.pyramid[(row, col)] = self.capacity
+            return excess
+        self.pyramid[(row, col)] += volume
+        return 0
+    
+    def pour_into_top(self, volume):
+        self.update_glass(volume, 1, 1)
+    
+    def pour_into_custom(self, volume, row, col):
+        """add volume to glass at row, col in pyramid
+        """
+        self.update_glass(volume, row, col)
+
+    def vol_in_row_col(self, row, col):
+        """returns the volume in the glass at row, col in pyramid
+        """
+        if (row, col) in self.pyramid:
+            return self.pyramid[(row,col)]
+        return 0
+
+
+pyr = Pyramid()
+
+pyr.pour_into_top(20)            #pouring in 20 litres
+print pyr.vol_in_row_col(7, 3)  #row 7, col 3 = .71875 L
 
