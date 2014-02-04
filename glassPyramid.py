@@ -26,8 +26,13 @@ class Pyramid(object):
         self.pyramid.append(Glass())
     
     def add_to_glass(self, glass, volume):
+        #recursive approach
+        #excess = glass.add(volume)
+        #if excess:
+        #   add_to_glass(glass.left, excess/2.)
+        #   add_to_glass(glass.right, excess/2.)
         pass
-        #recursive approach here
+        
         
     
 class Glass(object):
@@ -36,7 +41,7 @@ class Glass(object):
         self.col      = col
         self.capacity = capacity
         self.holding  = 0
-    
+
     def add(self, volume):
         """adds volume to glass, returns volume of overflow or 0 if no overflow
         volume: int or double
