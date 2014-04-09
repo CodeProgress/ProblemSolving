@@ -35,13 +35,34 @@ def isBouncy(x):
     if isDecreasing: return False
     
     return True
- 
+
+
+def isBouncyRec(x, incr = None):
+    """returns True if x is bouncy, False otherwise
+    (Recursive function, twice as fast as isBouncy)
+    """
+
+    #base case
+    if x == 0:return False
+
+    a = x % 10
+
+    x /= 10
+    if x == 0: return False
+
+    b = x % 10
+    if b == a: return isBouncyRec(x, incr)
+
+    direction = b > a
+    if incr == None:      return isBouncyRec(x, direction)
+    if incr == direction: return isBouncyRec(x, direction)
+    return True
 
 bouncyCounter = 0.
 num = 1
 while bouncyCounter/num < .99:
     num += 1
-    if isBouncy(num):
+    if isBouncyRec(num):
         bouncyCounter += 1
 
 print num
