@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+
+#The radical of n, rad(n), is the product of the distinct prime factors of n
+#
+#For example, 504 = 23 × 32 × 7, so rad(504) = 2 × 3 × 7 = 42
+#
+#Let e(k) be the kth element in the sorted n column; 
+#for example, e(4) = 8 and e(6) = 9
+#
+#If rad(n) is sorted for 1 <= n <= 100000, find e(10000)
+#
+#PEuler 124
 
 def sieve_with_rad(limit):
     '''returns a list of all primes <= limit
@@ -16,9 +28,9 @@ def sieve_with_rad(limit):
 
     return sieve
 
-limit = 100000
-place = 10000
+def e(limit = 100000, place = 10000):
+    radicalPairings = enumerate(sieve_with_rad(limit))
+    return sorted(radicalPairings, key = lambda x: x[1])[place][0]
 
-radicalPairings = enumerate(sieve_with_rad(limit))
-print sorted(radicalPairings, key = lambda x: x[1])[place][0]
+print e()
     
