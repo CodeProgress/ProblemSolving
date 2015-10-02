@@ -10,6 +10,13 @@ def bowling_score(rollsList):
     >>> rollsList2 = [10]*12
     >>> bowling_score(rollsList2)
     300
+    >>> rollsList3 = [10]*11
+    >>> rollsList3.append(9)
+    >>> bowling_score(rollsList3)
+    299
+    >>> rollsList2 = [0]*22
+    >>> bowling_score(rollsList2)
+    0
     """
 
     index = 0       #keep track of position within list
