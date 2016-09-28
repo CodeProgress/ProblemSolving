@@ -21,11 +21,10 @@ def count_pair_violations(x, y):
     
 num_trials = 10000
 lowest = 1000
+best_arrangement = []
 for _ in range(num_trials): 
     seating_arrangements = [''.join(x) for x in itertools.permutations('abcd', 4)]
     random.shuffle(seating_arrangements)
-    
-    best_arrangement = seating_arrangements
     
     new_arrangement = [seating_arrangements.pop()]
     
@@ -50,18 +49,21 @@ for _ in range(num_trials):
                 assert len(seating_arrangements) + len(new_arrangement) == 24
                 break
             target_low_violations += 1
-    
-        #print target_low_violations
 
     total = 0
-    for i in range(len(new_arrangement)-2):
+    for i in range(2, len(new_arrangement)):
         num_violations = count_violations(
             new_arrangement[i], 
-            new_arrangement[i+1],
-            new_arrangement[i+2])
+            new_arrangement[i-1],
+            new_arrangement[i-2])
         total += num_violations
     
     if total < lowest:
         best_arrangement = new_arrangement[:]
         lowest = total
         print lowest, best_arrangement
+        
+assert set(best_arrangement) == set([''.join(x) for x in itertools.permutations('abcd', 4)])
+
+for seating in map(list, zip(*best_arrangement)):
+    print ''.join(seating)
