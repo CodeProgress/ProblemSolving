@@ -1,6 +1,28 @@
 import itertools
 import random
 
+"""
+IBM "Ponder This" Challenge, September 2016
+
+It is impossible to seat three people (Alice, Bob, and Charlie) in three places
+for six hours, while changing places each hour in such a way that each hour has
+a different seating permutation and no one stays in his or her chair during two
+consecutive hours. Here is an "almost" solution: 
+A B C A B C
+B C A C A B
+C A B B C A
+
+The only violation is the "B B" in the middle of the third line. 
+Our challenge for this month is to design a seating plan for four people for
+24 hours in such a way that they don't repeat the same seating arrangement, and
+the number of violations is minimal, where violations refer to the same person
+sitting in the same place he sat in during one of the two preceding hours.
+Update (29/8): We count each person sitting violation separately, so ABCD-ABDC
+counts as two violations; and having the same person sit on the same seat for
+three consecutive hours count as three violations (t vs t+1; t+1 vs t+2 
+and t vs t+2) etc.
+"""
+
 def count_violations(x, y, z):
     violations = 0
     for i in range(len(x)):
