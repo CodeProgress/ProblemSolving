@@ -10,7 +10,9 @@ Space O(n)
 """
 
 def find_eq_index(a_list, num_elements):
-    if len(a_list) <= 1:
+    if len(a_list) == 0:
+        return -1
+    if len(a_list) == 1:
         return 0
         
     running_sum = [a_list[0]]
